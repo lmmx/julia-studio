@@ -42,6 +42,18 @@ chmod +x qt-linux-opensource-5.1.0-x86_64-offline.run
 ```
 ...run through the installation with default settings, although there is no reason to run Qt Creator.
 
+
+Now we need to get our build environment to use this version of Qt.  (Note: only tested on Qt-less systems so far.)
+```bash
+#64-bit
+cd Qt5.1.0/5.1.0/gcc_64
+#32-bit
+#cd Qt5.1.0/5.1.0/gcc
+qtbase=`pwd`
+export PATH=$PATH:$qtbase/bin
+cd ~
+```
+
 If you do have Qt installed, this will force Qt to use.  Don't do this if you don't need/want to.  It will impact other Qt-based environments.
 ```bash
 ##if multiple qts are present, this let's us choose without changing path
@@ -52,23 +64,16 @@ sudo mv default.conf /etc/xdg/qtchooser/default.conf
 
 ```
 
-Now we need to get our build environment to use this version of Qt.  (Note: only tested on Qt-less systems so far.)
-```bash
-#64-bit
-cd Qt5.1.0/5.1.0/gcc_64
-#32-bit
-#cd Qt5.1.0/5.1.0/gcc
-qtbase=`pwd`
-export PATH=$PATH:$qtbase/bin
-cd ../../../
-```
-
 Time for Julia Studio. Clone from github and then build.  
 ```bash
 #anon clone
 git clone https://github.com/forio/julia-studio.git
 cd julia-studio
 qmake -r
+```
+# In case this fails, install qt-make
+# sudo apt-get install qt-sdk
+```
 make
 ```
 
